@@ -96,7 +96,6 @@ export function useParceiros() {
         )
         .order("created_at", { ascending: false });
       if (err) throw err;
-      console.log("DADOS CARREGADOS:", data);
       parceiros.value = data || [];
     } catch (err: unknown) {
       const e = err as { message?: string };
