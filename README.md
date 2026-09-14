@@ -1,3 +1,19 @@
+## Entrega — Ronald Dias
+
+### O que fiz
+
+Modelei a tabela `parceiro` em migration SQL com as constraints de negócio no banco (CNPJ único, limite de crédito não-negativo, FKs obrigatórias). No frontend, criei os componentes wrapper do design system (KInput, KInputMoney, KDatePicker, KSelect, KSwitch, KButton) isolando o PrimeVue conforme a regra de padronização, e o composable `useParceiros` concentrando toda a lógica de dados e tratamento de erro, incluindo o erro de CNPJ duplicado (código 23505). O PRD, o ADR com as decisões de modelagem e o processo de AI estão em `docs/`.
+
+### O que ficou de fora
+
+Não fiz Storybook nem testes automatizados, por priorizar o tempo em padronização e modelagem, que pesam mais na avaliação. A listagem ficou simples, sem filtro nem paginação, conforme já orientado no enunciado.
+
+### O que faria diferente com mais tempo
+
+Adicionaria testes unitários no composable `useParceiros`, especialmente no tratamento de erro de duplicidade, e uma story de Storybook do `KSelect`, que é o componente mais complexo por causa da dependência reativa entre UF e Município.
+
+---
+
 # Desafio Técnico: Dev Fullstack Vue.js / PostgreSQL
 
 Olá! Se você chegou aqui, é porque avançou no processo da vaga de **Desenvolvedor Fullstack Vue.js / PostgreSQL** da Keeptor. Obrigado pelo seu tempo, sabemos que ele é caro.
@@ -18,7 +34,7 @@ Uma coisa que vale mais que o tempo:
 
 Se você perceber que não vai dar conta de tudo, **pare e escreva no seu README o que ficou de fora e por quê**. Saber cortar escopo e explicar o corte é parte do que estamos avaliando, e talvez a parte mais importante.
 
-**Use AI à vontade.** Claude, Cursor, Copilot, o que você usa no dia a dia. Não só é permitido, é esperado: a vaga pede experiência real com desenvolvimento assistido por AI. Só lembre que, se o seu código for aprovado, a etapa seguinte é uma conversa técnica sobre ele (veja *Entrega*). Então entregue algo que você consiga explicar.
+**Use AI à vontade.** Claude, Cursor, Copilot, o que você usa no dia a dia. Não só é permitido, é esperado: a vaga pede experiência real com desenvolvimento assistido por AI. Só lembre que, se o seu código for aprovado, a etapa seguinte é uma conversa técnica sobre ele (veja _Entrega_). Então entregue algo que você consiga explicar.
 
 ---
 
@@ -57,12 +73,12 @@ E se não resolver, **fale com a gente**. Problema de ambiente é nosso, não se
 
 Para você não gastar tempo com preparação de ambiente:
 
-| Já entregue | Onde fica |
-|---|---|
-| Supabase no Docker (Postgres, Auth, PostgREST e Studio) | `backend/` |
-| Login funcionando, proteção de rota e logout | `frontend/src/pages/LoginPage.vue` |
-| Tabelas `uf` e `municipio` **já populadas** com os dados oficiais do IBGE (27 UFs e 5.571 municípios) | `backend/migrations/` |
-| Vue 3.5, Vite, TypeScript, PrimeVue 4 e Tailwind 4 instalados e configurados | `frontend/` |
+| Já entregue                                                                                           | Onde fica                          |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| Supabase no Docker (Postgres, Auth, PostgREST e Studio)                                               | `backend/`                         |
+| Login funcionando, proteção de rota e logout                                                          | `frontend/src/pages/LoginPage.vue` |
+| Tabelas `uf` e `municipio` **já populadas** com os dados oficiais do IBGE (27 UFs e 5.571 municípios) | `backend/migrations/`              |
+| Vue 3.5, Vite, TypeScript, PrimeVue 4 e Tailwind 4 instalados e configurados                          | `frontend/`                        |
 
 **Sobre as tabelas `uf` e `municipio`:** elas vêm prontas, mas não são intocáveis. Se você achar que a modelagem deveria ser outra, pode mudar. Só explique a decisão nos seus documentos.
 
@@ -74,17 +90,17 @@ Para você não gastar tempo com preparação de ambiente:
 
 É o que usamos aqui no dia a dia, e já vem instalado e configurado no repositório.
 
-| Tecnologia | Versão | Onde entra |
-|---|---|---|
-| **Vue 3** (Composition API, `<script setup>`) | 3.5 | Toda a interface |
-| **TypeScript** | 5.8 | Todo o código do frontend |
-| **PrimeVue** | 4.5 | Base dos seus componentes, sempre por trás de um wrapper seu |
-| **Tailwind CSS** | 4.3 | Estilo e layout |
-| **PostgreSQL** | 15 | Banco, com as regras modeladas em migrations SQL |
-| **Docker** | qualquer versão atual | Sobe todo o ambiente |
-| Vite | 7.3 | Build e dev server, já configurado |
-| vue-router | 4 | Rotas, já configurado com a proteção de login |
-| supabase-js | 2 | Cliente da API, já configurado |
+| Tecnologia                                    | Versão                | Onde entra                                                   |
+| --------------------------------------------- | --------------------- | ------------------------------------------------------------ |
+| **Vue 3** (Composition API, `<script setup>`) | 3.5                   | Toda a interface                                             |
+| **TypeScript**                                | 5.8                   | Todo o código do frontend                                    |
+| **PrimeVue**                                  | 4.5                   | Base dos seus componentes, sempre por trás de um wrapper seu |
+| **Tailwind CSS**                              | 4.3                   | Estilo e layout                                              |
+| **PostgreSQL**                                | 15                    | Banco, com as regras modeladas em migrations SQL             |
+| **Docker**                                    | qualquer versão atual | Sobe todo o ambiente                                         |
+| Vite                                          | 7.3                   | Build e dev server, já configurado                           |
+| vue-router                                    | 4                     | Rotas, já configurado com a proteção de login                |
+| supabase-js                                   | 2                     | Cliente da API, já configurado                               |
 
 Uma observação sobre o banco: as regras de negócio devem ficar **no PostgreSQL**, em constraints, índices e o que mais fizer sentido, e não só validadas no frontend. Isso é parte da vaga.
 
@@ -92,14 +108,14 @@ Uma observação sobre o banco: as regras de negócio devem ficar **no PostgreSQ
 
 Não instalamos nada disso de propósito. Escolher (ou decidir não usar) faz parte do que estamos olhando.
 
-| Precisa de | Exemplos | Obrigatório? |
-|---|---|---|
-| Gerenciamento de estado | Pinia, composables próprios | Não, talvez nem precise |
-| Validação de formulário | Zod, Valibot, `@primevue/forms`, validação na mão | Não |
-| Camada de dados e cache | TanStack Query, composable próprio, chamada direta | Não |
-| Máscara de campo | PrimeVue InputMask, Maska, a sua própria | Não |
-| Documentação de componente | **Storybook** | Não, mas conta a favor |
-| Testes | Vitest, Playwright | Não, mas conta a favor |
+| Precisa de                 | Exemplos                                           | Obrigatório?            |
+| -------------------------- | -------------------------------------------------- | ----------------------- |
+| Gerenciamento de estado    | Pinia, composables próprios                        | Não, talvez nem precise |
+| Validação de formulário    | Zod, Valibot, `@primevue/forms`, validação na mão  | Não                     |
+| Camada de dados e cache    | TanStack Query, composable próprio, chamada direta | Não                     |
+| Máscara de campo           | PrimeVue InputMask, Maska, a sua própria           | Não                     |
+| Documentação de componente | **Storybook**                                      | Não, mas conta a favor  |
+| Testes                     | Vitest, Playwright                                 | Não, mas conta a favor  |
 
 Se você achar que uma dessas camadas não se justifica num CRUD desse tamanho, **não use e escreva o porquê**. Decidir não adotar é uma decisão tão avaliável quanto adotar.
 
@@ -216,12 +232,12 @@ Não pergunte para a gente. **Decida, escreva a decisão e siga em frente.** A f
 
 ## 📊 Como avaliamos
 
-| Critério | Peso |
-|---|---|
-| **Padronização:** seus componentes e a consistência da tela | **35%** |
-| **Modelagem de banco:** relacionamentos, constraints, índices e normalização | **25%** |
+| Critério                                                                              | Peso    |
+| ------------------------------------------------------------------------------------- | ------- |
+| **Padronização:** seus componentes e a consistência da tela                           | **35%** |
+| **Modelagem de banco:** relacionamentos, constraints, índices e normalização          | **25%** |
 | **Processo:** documentos, divisão por feature, histórico de commits e seu setup de AI | **25%** |
-| **Entrega funcional:** sobe, funciona, é responsiva e acessível | **15%** |
+| **Entrega funcional:** sobe, funciona, é responsiva e acessível                       | **15%** |
 
 O login não entra na nota, porque já veio pronto.
 
@@ -238,7 +254,7 @@ O login não entra na nota, porque já veio pronto.
 
 O prazo você recebe na mensagem do avaliador, junto com o link deste repositório.
 
-Depois da entrega, o seu código passa pela nossa avaliação. **Se ele for aprovado nessa etapa, marcamos 30 minutos de conversa técnica.** Sem pegadinha e sem quadro branco: você abre o que fez e explica as decisões. Vamos perguntar coisas como *"por que campo único composto aqui e não simples?"* ou *"o que acontece se duas pessoas cadastrarem o mesmo CNPJ ao mesmo tempo?"*.
+Depois da entrega, o seu código passa pela nossa avaliação. **Se ele for aprovado nessa etapa, marcamos 30 minutos de conversa técnica.** Sem pegadinha e sem quadro branco: você abre o que fez e explica as decisões. Vamos perguntar coisas como _"por que campo único composto aqui e não simples?"_ ou _"o que acontece se duas pessoas cadastrarem o mesmo CNPJ ao mesmo tempo?"_.
 
 Essa conversa pesa tanto quanto o código. Entregue algo que seja seu.
 
