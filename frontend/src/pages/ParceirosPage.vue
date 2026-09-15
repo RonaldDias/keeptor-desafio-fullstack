@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, watch } from "vue";
+import { z } from "zod";
 import {
   KInput,
   KInputMoney,
@@ -73,7 +74,34 @@ const editar = (p: Parceiro) => {
   exibindoForm.value = true;
 };
 
+const parceiroSchema = z.object({
+  razao_social: z.string().min(1, "Razão Social é obrigatória."),
+  nome_fantasia: z.string().min(1, "Nome Fantasia é obrigatório."),
+  telefone: z.string().min(1, "Telefone é obrigatório."),
+  email: z.string().min(1, "E-mail é obrigatório.").email("E-mail inválido."),
+  cep: z.string().min(1, "CEP é obrigatório."),
+  logradouro: z.string().min(1, "Logradouro é obrigatório."),
+  numero: z.string().min(1, "Número é obrigatório."),
+  bairro: z.string().min(1, "Bairro é obrigatório."),
+  uf_id: z.number({ error: "Selecione a UF." }),
+  municipio_id: z.number({ error: "Selecione o Município." }),
+});
+
+const validarForm = (): string | null => {
+  const resultado = parceiroSchema.safeParse(form);
+  if (!resultado.success) {
+    return resultado.error.issues[0].message;
+  }
+  return null;
+};
+
 const salvar = async () => {
+  const erroValidacao = validarForm();
+  if (erroValidacao) {
+    erroApi.value = erroValidacao;
+    return;
+  }
+
   salvando.value = true;
   erroApi.value = "";
 
