@@ -92,8 +92,8 @@ const onChange = (event: SelectChangeEvent) => {
         class="w-full !rounded-lg !border !text-sm transition-colors"
         :class="
           error
-            ? '!border-rose-500 !ring-rose-200'
-            : '!border-slate-300 focus:!border-indigo-600 focus:!ring-indigo-100'
+            ? '!border-rose-500 focus-within:!ring-2 focus-within:!ring-rose-200'
+            : '!border-slate-300 focus-within:!border-indigo-600 focus-within:!ring-2 focus-within:!ring-indigo-100'
         "
         @change="onChange"
         @blur="emit('blur', $event)"
