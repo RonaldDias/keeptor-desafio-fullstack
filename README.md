@@ -10,7 +10,7 @@ Não implementei paginação nem filtros na listagem, conforme já orientado no 
 
 ### O que faria diferente com mais tempo
 
-Adicionaria testes unitários no composable `useParceiros`, especialmente no tratamento de erro de duplicidade, e uma story de Storybook do `KSelect`, que é o componente mais complexo por causa da dependência reativa entre UF e Município.
+Adicionaria testes unitários para os demais componentes do design system além do `KSelect`, e ampliaria a cobertura de testes do `useParceiros` para o fluxo de edição, não só o de criação. Também avaliaria extrair a validação de obrigatoriedade para dentro dos próprios componentes do design system (cada wrapper expondo seu próprio estado de validade), em vez de centralizar tudo no schema Zod da página, isso deixaria o padrão mais reutilizável para novas telas que usem os mesmos componentes.
 
 ---
 
