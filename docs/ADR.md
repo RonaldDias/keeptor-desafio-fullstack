@@ -10,6 +10,8 @@
 | Reativação        | Toggle no campo `ativo BOOLEAN DEFAULT true` | Preserva histórico e CNPJ; registro novo fragmentaria dados                                                                                 |
 | Limite de crédito | `NUMERIC(12,2) NOT NULL DEFAULT 0.00`        | Zero = sem crédito; `NULL` gera ambiguidade em cálculos (`NULL + valor = NULL`)                                                             |
 
+| Validação de obrigatoriedade | Client-side com Zod, antes do submit | Evita erro cru de constraint do banco chegando à tela; banco continua como última linha de defesa |
+
 ## Design System
 
 **"Se trocássemos o PrimeVue, quantos arquivos mudariam?"**

@@ -2,11 +2,11 @@
 
 ### O que fiz
 
-Modelei a tabela `parceiro` em migration SQL com as constraints de negócio no banco (CNPJ único, limite de crédito não-negativo, FKs obrigatórias). No frontend, criei os componentes wrapper do design system (KInput, KInputMoney, KDatePicker, KSelect, KSwitch, KButton) isolando o PrimeVue conforme a regra de padronização, e o composable `useParceiros` concentrando toda a lógica de dados e tratamento de erro, incluindo o erro de CNPJ duplicado (código 23505). O PRD, o ADR com as decisões de modelagem e o processo de AI estão em `docs/`. Configurei o Storybook do zero (não vinha no projeto) e documentei o `KSelect` com quatro variações (Default, Com Erro, Desabilitado, Carregando), incluindo o registro do PrimeVue com o mesmo tema da aplicação para renderização fiel. Para visualizar: `npm run storybook` dentro da pasta `frontend`.
+Modelei a tabela `parceiro` em migration SQL com as constraints de negócio no banco (CNPJ único, limite de crédito não-negativo, FKs obrigatórias). No frontend, criei os componentes wrapper do design system (KInput, KInputMoney, KDatePicker, KSelect, KSwitch, KButton) isolando o PrimeVue conforme a regra de padronização, e o composable `useParceiros` concentrando toda a lógica de dados e tratamento de erro, incluindo o erro de CNPJ duplicado (código 23505). O PRD, o ADR com as decisões de modelagem e o processo de AI estão em `docs/`. Configurei o Storybook do zero (não vinha no projeto) e documentei o `KSelect` com quatro variações (Default, Com Erro, Desabilitado, Carregando), incluindo o registro do PrimeVue com o mesmo tema da aplicação para renderização fiel. Para visualizar: `npm run storybook` dentro da pasta `frontend`. Escrevi um teste unitário para `salvarParceiro`, cobrindo o tratamento do erro de CNPJ duplicado (código 23505) e o caminho de sucesso, usando Vitest com mock do cliente Supabase. Para rodar: `npm run test` dentro da pasta `frontend`.
 
 ### O que ficou de fora
 
-Não fiz testes automatizados, por priorizar o tempo em padronização e modelagem, que pesam mais na avaliação. A listagem ficou simples, sem filtro nem paginação, conforme já orientado no enunciado.
+Não implementei paginação nem filtros na listagem, conforme já orientado no enunciado como fora de escopo.
 
 ### O que faria diferente com mais tempo
 
